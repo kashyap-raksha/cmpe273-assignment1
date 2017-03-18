@@ -14,7 +14,7 @@ def display(filename):
     url = argument.split("/")[-2:]
     user_name = url[0]
     repo_name = url[1]
-    git = Github("kashyap-raksha", "kashyap39")
+    git = Github()
     repo = git.get_user(user_name).get_repo(repo_name)
 
     if repo.name == "assignment1-config-example":
@@ -28,14 +28,12 @@ def display(filename):
 
         elif filename.lower().endswith('.json'):
             if filename.lower() == "dev-config.json":
-                file_contents = repo.get_file_contents('dev-config.yml')
-                #contents = str("{\n\t"+file_contents+"\n}")
-                return "{"+file_contents.decoded_content+"}"
+                file_contents = repo.get_file_contents('dev-config.json')
+                return file_contents.decoded_content
 
             elif filename.lower() == "test-config.json":
-                contents = repo.get_file_contents('test-config.yml')
-                #json_obj = json.dumps(contents)
-                return "{"+(contents).decoded_content+"}"
+                file_contents = repo.get_file_contents('test-config.json')
+                return (file_contents).decoded_content
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
